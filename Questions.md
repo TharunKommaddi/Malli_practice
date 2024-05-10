@@ -1,3 +1,5 @@
+# GROUP BY
+
 Let's expand the example to include a wider range of aggregate functions on a relational database schema that now includes a `salaries` table. This will allow us to use `SUM`, `AVG`, `MAX`, and `MIN` aggregate functions in addition to `COUNT`.
 
 ### Expanded Table Creation and Data Insertion
@@ -105,3 +107,100 @@ GROUP BY d.dept_name;
 - **MIN(s.salary)**: Identifies the minimum salary in each department.
 
 These aggregate functions provide various dimensions of data analysis such as total expenditure on salaries per department, identifying departments with the highest and lowest earners, and understanding salary distributions within departments.
+
+# ORDER BY, LIMIT, OFFSET 
+
+### SQL Queries and Outputs
+
+#### **1. ORDER BY DESC (Descending Order)**
+This query sorts employees by their salary in descending order, so you can see the highest earners first. It's useful for quickly identifying top-paid employees.
+
+**Query:**
+```sql
+SELECT e.name, s.salary
+FROM employees e
+JOIN salaries s ON e.employee_id = s.employee_id
+ORDER BY s.salary DESC;
+```
+
+**Expected Output:**
+```markdown
+| name          | salary |
+|---------------|--------|
+| Sarah Davis   | 80000  |
+| Mike Brown    | 75000  |
+| Jane Smith    | 60000  |
+| John Doe      | 50000  |
+| Chris Lee     | 50000  |
+| Alice Johnson | 45000  |
+```
+
+#### **2. ORDER BY ASC (Ascending Order)**
+This query sorts employees by their salary in ascending order, which helps in identifying the lowest earners within the company. It's especially useful for HR and payroll analyses.
+
+**Query:**
+```sql
+SELECT e.name, s.salary
+FROM employees e
+JOIN salaries s ON e.employee_id = s.employee_id
+ORDER BY s.salary ASC;
+```
+
+**Expected Output:**
+```markdown
+| name          | salary |
+|---------------|--------|
+| Alice Johnson | 45000  |
+| John Doe      | 50000  |
+| Chris Lee     | 50000  |
+| Jane Smith    | 60000  |
+| Mike Brown    | 75000  |
+| Sarah Davis   | 80000  |
+```
+
+#### **3. LIMIT with ORDER BY DESC**
+This query is used to retrieve only the top 3 highest salaries from the database, ordered from the highest to lowest. This kind of query is useful for reports that need to highlight the top earners, such as executive summaries or financial reports.
+
+**Query:**
+```sql
+SELECT e.name, s.salary
+FROM employees e
+JOIN salaries s ON e.employee_id = s.employee_id
+ORDER BY s.salary DESC
+LIMIT 3;
+```
+
+**Expected Output:**
+```markdown
+| name          | salary |
+|---------------|--------|
+| Sarah Davis   | 80000  |
+| Mike Brown    | 75000  |
+| Jane Smith    | 60000  |
+```
+
+#### **4. OFFSET with ORDER BY DESC and LIMIT**
+This query demonstrates how to skip the top 3 highest salaries and then pick the next 3 in the list. It's particularly useful for pagination or when you need to display salary data in chunks, such as on different pages of a web application.
+
+**Query:**
+```sql
+SELECT e.name, s.salary
+FROM employees e
+JOIN salaries s ON e.employee_id = s.employee_id
+ORDER BY s.salary DESC
+LIMIT 3 OFFSET 3;
+```
+
+**Expected Output:**
+```markdown
+| name          | salary |
+|---------------|--------|
+| John Doe      | 50000  |
+| Chris Lee     | 50000  |
+| Alice Johnson | 45000  |
+```
+
+### Explanation of Each Concept
+- **ORDER BY DESC and ASC**: These queries provide a straightforward way to view salaries from highest to lowest and vice versa. They are crucial for financial analysis and employee management.
+- **LIMIT**: It limits the number of rows returned by the query, which is essential when you only need to see a subset of the data, such as the top performers.
+- **OFFSET**: It skips a specified number of records. When combined with `LIMIT`, it allows for advanced data slicing, which is crucial for creating paginated views in applications. 
