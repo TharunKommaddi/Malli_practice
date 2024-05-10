@@ -1,4 +1,4 @@
-Certainly! Let's expand the example to include a wider range of aggregate functions on a relational database schema that now includes a `salaries` table. This will allow us to use `SUM`, `AVG`, `MAX`, and `MIN` aggregate functions in addition to `COUNT`.
+Let's expand the example to include a wider range of aggregate functions on a relational database schema that now includes a `salaries` table. This will allow us to use `SUM`, `AVG`, `MAX`, and `MIN` aggregate functions in addition to `COUNT`.
 
 ### Expanded Table Creation and Data Insertion
 
@@ -105,5 +105,3 @@ GROUP BY d.dept_name;
 - **MIN(s.salary)**: Identifies the minimum salary in each department.
 
 These aggregate functions provide various dimensions of data analysis such as total expenditure on salaries per department, identifying departments with the highest and lowest earners, and understanding salary distributions within departments.
-
-This comprehensive use of SQL aggregate functions, in conjunction with joins and groupings, helps derive significant insights from the data, facilitating effective decision-making and reporting in a business context. If you need more details or specific scenarios, feel free to ask!
